@@ -7,7 +7,6 @@
    [user.auto-reset :refer [auto-reset halt-auto-reset]]))
 
 (println "dev/user.clj loaded")
-;;(clojure.tools.namespace.repl/disable-reload!)
 
 (defn go []
   (igr/set-prep! (constantly config))

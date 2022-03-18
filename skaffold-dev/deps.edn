@@ -22,17 +22,12 @@
                      hawk/hawk                   {:mvn/version "0.2.11"}}
         :main-opts ["-m" "user"]}
 
-;;   :cider-nrepl {:extra-deps {cider/cider-nrepl  {:mvn/version "0.28.3"}}
-;;                 :main-opts ["-m" "nrepl.cmdline"
-;;                             "--middleware" "[cider.nrepl/cider-middleware]"
-;;                             "--bind" "0.0.0.0"
-;;                             "--port" "3177"]}
-
   :skaffold-dev {:replace-paths ["build"]
                  :replace-deps {io.github.atomisthq/jibbit {:git/tag "v0.1.13" :git/sha "4547f2d"}}
                  :exec-fn skaffold/exec-jib
                  :exec-args {:aliases [:dev]
-                             :base-image {:image-name "arm64v8/openjdk:11.0.14.1-jre-bullseye"
+                             :working-dir "/home/app"
+                             :base-image {:image-name "arm64v8/openjdk:11.0.14.1-jdk-bullseye"
                                           :type :registry}
                              :target-image {:image-name "myusername/mynewapp"
                                             :type :docker}}}}}

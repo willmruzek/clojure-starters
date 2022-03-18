@@ -7,7 +7,7 @@ minikube start
 skaffold dev --no-prune=false --cache-artifacts=false --auto-build=false
 ```
 
-Connect to nrepl at localhost:3177.
+Connect to nrepl at `localhost:3177`.
 
 ## TODO
 

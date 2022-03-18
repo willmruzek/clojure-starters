@@ -24,7 +24,7 @@
   `src` or `resources`."
   []
   (let [watcher-ref
-        (hawk/watch! [{:paths ["src/" "resources/" #_"dev/src/" #_"dev/resources/"]
+        (hawk/watch! [{:paths ["src/" "dev/" "resources/"]
                        :filter clojure-file?
                        :handler auto-reset-handler}])]
     (swap! watcher (constantly watcher-ref))))

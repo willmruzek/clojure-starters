@@ -11,6 +11,15 @@ build:
       dependencies:
         paths:
         - src/
+        - dev/
+    sync:
+      manual:
+      - src: src/**
+        dest: .
+      - src: dev/**
+        dest: .
+      - src: resources/**
+        dest: .
 
 deploy:
   kubectl:
