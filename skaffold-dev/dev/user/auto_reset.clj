@@ -1,4 +1,4 @@
-(ns userr.auto-reset
+(ns user.auto-reset
   (:require
    [clojure.tools.namespace.repl]
    [integrant.repl :as igr]
