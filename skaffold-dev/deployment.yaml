@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myusername-mynewapp
+  labels:
+    app: myusername-mynewapp
+spec:
+  ports:
+  - name: nrepl
+    port: 3177
+    protocol: TCP
+  - name: web-server
+    port: 8080
+    protocol: TCP
+  clusterIP: None
+  selector:
+    app: myusername-mynewapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myusername-mynewapp
+  labels:
+    app: myusername-mynewapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myusername-mynewapp
+  template:
+    metadata:
+      labels:
+        app: myusername-mynewapp
+    spec:
+      containers:
+      - name: myusername-mynewapp
+        image: myusername-mynewapp

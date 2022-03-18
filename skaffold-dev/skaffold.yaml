@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta27
+kind: Config
+metadata:
+  name: mynewapp
+
+build:
+  artifacts:
+  - image: myusername-mynewapp
+    custom:
+      buildCommand: clj -X:skaffold-dev
+      dependencies:
+        paths:
+        - src/
+
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yaml
+
+portForward:
+- resourceType: service
+  resourceName: myusername-mynewapp
+  port: 8080
+- resourceType: service
+  resourceName: myusername-mynewapp
+  port: 3177

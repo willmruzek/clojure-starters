@@ -1,0 +1,38 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure       {:mvn/version "1.10.3"}
+        integrant/integrant       {:mvn/version "0.8.0"}
+        ring/ring                 {:mvn/version "1.8.0"}
+        ring/ring-core            {:mvn/version "1.8.2"}
+        ring/ring-defaults        {:mvn/version "0.3.3"}
+        ring/ring-jetty-adapter   {:mvn/version "1.8.2"}
+        compojure/compojure       {:mvn/version "1.6.2"}
+        metosin/muuntaja          {:mvn/version "0.6.8"}
+        com.wsscode/pathom        {:mvn/version "2.4.0"}
+        com.fulcrologic/fulcro    {:mvn/version "3.5.13"}
+        com.taoensso/timbre       {:mvn/version "5.1.2"}
+        com.fzakaria/slf4j-timbre {:mvn/version "0.3.21"}
+        cider/cider-nrepl         {:mvn/version "0.28.3"}}
+
+ :aliases
+ {:prod {:main-opts ["-m" "myusername.mynewapp.core"]}
+
+  :dev {:extra-paths ["dev"]
+        :extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}
+                     integrant/repl              {:mvn/version "0.3.2"}
+                     hawk/hawk                   {:mvn/version "0.2.11"}}
+        :main-opts ["-m" "user"]}
+
+;;   :cider-nrepl {:extra-deps {cider/cider-nrepl  {:mvn/version "0.28.3"}}
+;;                 :main-opts ["-m" "nrepl.cmdline"
+;;                             "--middleware" "[cider.nrepl/cider-middleware]"
+;;                             "--bind" "0.0.0.0"
+;;                             "--port" "3177"]}
+
+  :skaffold-dev {:replace-paths ["build"]
+                 :replace-deps {io.github.atomisthq/jibbit {:git/tag "v0.1.13" :git/sha "4547f2d"}}
+                 :exec-fn skaffold/exec-jib
+                 :exec-args {:aliases [:dev]
+                             :base-image {:image-name "arm64v8/openjdk:11.0.14.1-jre-bullseye"
+                                          :type :registry}
+                             :target-image {:image-name "myusername/mynewapp"
+                                            :type :docker}}}}}
