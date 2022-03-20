@@ -18,6 +18,7 @@ Connect to nrepl at `localhost:3177`.
 ## TODO
 
 - [x] Workflow: Develop
+  - [ ] Allow dev to `start-auto-reset` on launch via `clj -T:build run-dev [opts]` (otherwise you need to start a REPL and invoke `start-auto-reset`)
 - [x] Workflow: Test
   - [x] `clj -T:build test`
   - [x] Test after Skaffold builds
