@@ -25,7 +25,7 @@
 (defn exec-jib [opts]
   (println "Running jib via jibbit with config:")
   (pprint (get-jib-config opts))
-  (jibbit/build (get-jib-config opts)))
+  (jibbit/build {:config (get-jib-config opts)}))
 
 (comment
   (exec-jib {:main "myapp.core"

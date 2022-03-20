@@ -7,7 +7,7 @@ build:
   artifacts:
   - image: myusername-mynewapp
     custom:
-      buildCommand: clj -X:skaffold-dev
+      buildCommand: clj -T:build skaffold-dev
       dependencies:
         paths:
         - src/
@@ -20,6 +20,17 @@ build:
         dest: .
       - src: resources/**
         dest: .
+      - src: test/**
+        dest: .
+
+test:
+  - image: myusername-mynewapp
+    custom:
+      - command: clj -T:build test
+        timeoutSeconds: 60
+        dependencies:
+          paths:
+          -  "test/**"
 
 deploy:
   kubectl:

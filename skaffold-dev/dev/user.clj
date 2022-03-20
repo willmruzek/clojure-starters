@@ -1,21 +1,21 @@
 (ns user
   (:gen-class)
   (:require
-   [clojure.tools.namespace.repl]
    [integrant.repl :as igr]
-   [myusername.mynewapp.system :refer [config]]
-   [user.auto-reset :refer [auto-reset halt-auto-reset]]))
+   [user.auto-reset :refer [start-auto-reset stop-auto-reset]]
+   [user.testing :refer [run-unit start-watch-unit stop-watch-unit]]
+   [user.nrepl]
+   [myusername.mynewapp.system]))
 
 (println "dev/user.clj loaded")
 
 (defn go []
-  (igr/set-prep! (constantly config))
-  (igr/go)
-  (auto-reset))
+  (igr/set-prep! #(merge myusername.mynewapp.system/config
+                         user.nrepl/config))
+  (igr/go))
 
 (defn halt []
-  (igr/halt)
-  (halt-auto-reset))
+  (igr/halt))
 
 (def reset igr/reset)
 
@@ -27,7 +27,13 @@
 (comment
   (go)
   (halt)
+
   (reset)
   (reset-all)
-  (auto-reset)
-  (halt-auto-reset))
+
+  (start-auto-reset)
+  (stop-auto-reset)
+
+  (run-unit)
+  (start-watch-unit)
+  (stop-watch-unit))

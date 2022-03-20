@@ -14,20 +14,19 @@
         cider/cider-nrepl         {:mvn/version "0.28.3"}}
 
  :aliases
- {:prod {:main-opts ["-m" "myusername.mynewapp.core"]}
+ {:run {:main-opts ["-m" "myusername.mynewapp.main"]}
 
-  :dev {:extra-paths ["dev"]
-        :extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}
-                     integrant/repl              {:mvn/version "0.3.2"}
-                     hawk/hawk                   {:mvn/version "0.2.11"}}
-        :main-opts ["-m" "user"]}
+  :env/dev {:extra-paths ["dev"]
+            :extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}
+                         integrant/repl              {:mvn/version "0.3.2"}
+                         hawk/hawk                   {:mvn/version "0.2.11"}}}
 
-  :skaffold-dev {:replace-paths ["build"]
-                 :replace-deps {io.github.atomisthq/jibbit {:git/tag "v0.1.13" :git/sha "4547f2d"}}
-                 :exec-fn skaffold/exec-jib
-                 :exec-args {:aliases [:dev]
-                             :working-dir "/home/app"
-                             :base-image {:image-name "arm64v8/openjdk:11.0.14.1-jdk-bullseye"
-                                          :type :registry}
-                             :target-image {:image-name "myusername/mynewapp"
-                                            :type :docker}}}}}
+  :env/test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.64.1010"}}}
+
+  ;; Tools
+  :build {:deps {io.github.seancorfield/build-clj
+                 {:git/tag "v0.6.3" :git/sha "9b8e09b"
+                  :deps/root "slim"}}
+          :ns-default build
+          :extra-paths ["build"]
+          :extra-deps {io.github.atomisthq/jibbit {:git/tag "v0.1.13" :git/sha "4547f2d"}}}}}

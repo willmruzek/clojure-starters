@@ -2,33 +2,29 @@
   (:require
    [clojure.tools.namespace.repl]
    [integrant.repl :as igr]
-   [hawk.core :as hawk]))
+   [hawk.core :as hawk]
+   [nextjournal.beholder :as beholder]))
 
 (clojure.tools.namespace.repl/disable-reload!)
 
-(defn- clojure-file? [_ {:keys [file]}]
-  (re-matches #"[^.].*(\.clj|\.edn)$" (.getName file)))
-
-(defn- auto-reset-handler [ctx event]
+(defn- auto-reset-handler [event]
+  (prn event)
   (binding [*ns* *ns*]
-    (integrant.repl/reset)
-    ctx))
+    (integrant.repl/reset)))
 
-(def watcher (atom nil))
+(defonce ^:private watcher (atom nil))
 
-(defn halt-auto-reset []
-  (hawk/stop! @watcher))
+(defn stop-auto-reset []
+  (beholder/stop @watcher))
 
-(defn auto-reset
+(defn start-auto-reset
   "Automatically reset the system when a Clojure or edn file is changed in
   `src` or `resources`."
   []
-  (let [watcher-ref
-        (hawk/watch! [{:paths ["src/" "dev/" "resources/"]
-                       :filter clojure-file?
-                       :handler auto-reset-handler}])]
-    (swap! watcher (constantly watcher-ref))))
+  (reset! watcher
+          (beholder/watch auto-reset-handler
+                          "src" "dev" "resources" "test")))
 
 (comment
   (auto-reset)
-  (halt-auto-reset))
+  (stop-auto-reset))
