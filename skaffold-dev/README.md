@@ -17,6 +17,7 @@ Connect to nrepl at `localhost:3177`.
 
 ## TODO
 
+- [ ] Add usage docs
 - [x] Workflow: Develop
   - [ ] Allow dev to `start-auto-reset` on launch via `clj -T:build run-dev [opts]` (otherwise you need to start a REPL and invoke `start-auto-reset`)
 - [x] Workflow: Test
