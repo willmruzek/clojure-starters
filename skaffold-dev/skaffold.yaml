@@ -7,7 +7,7 @@ build:
   artifacts:
   - image: myusername-mynewapp
     custom:
-      buildCommand: clj -T:build skaffold-dev
+      buildCommand: clj -T:build build-container
       dependencies:
         paths:
         - src/

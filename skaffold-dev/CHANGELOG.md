@@ -16,6 +16,13 @@ Because these are just starters, they will not be officially versioned.
 ### Security
 -->
 
+## 2022-03-22
+
+### Changed
+
+- Rename `clj -T:build skaffold-dev` -> `clj -T:build build-container`
+- Consolidate `build/skaffold.clj` logic into `build.clj` and remove `build/skaffold.clj`
+
 ## 2022-03-20
 
 ### Added
