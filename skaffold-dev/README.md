@@ -15,9 +15,31 @@ skaffold dev --auto-build=false --no-prune=false --cache-artifacts=false
 
 Connect to nrepl at `localhost:3177`.
 
+## Usage
+
+### Testing
+
+#### One-time
+
+To run tests on demand, connect to the nREPL and run:
+
+```clj
+(start-auto-reset) ; Run once
+(run-unit) ; Run as desired
+```
+
+#### Auto-run
+
+Unfortunately in-REPL auto-run testing with kaocha `(start-watch-unit)` does not work at the moment.
+
+Thankfully, `skaffold dev` will automatically re-run tests when they change, assuming the `--skip-tests` flag is not applied.
+
 ## TODO
 
 - [ ] Add usage docs
+  - [ ] Development
+  - [x] Testing
+  - [ ] Deploy to registry
 - [x] Workflow: Develop
   - [ ] Allow dev to `start-auto-reset` on launch via `clj -T:build run-dev [opts]` (otherwise you need to start a REPL and invoke `start-auto-reset`)
 - [x] Workflow: Test

@@ -26,5 +26,5 @@
                           "src" "dev" "resources" "test")))
 
 (comment
-  (auto-reset)
+  (start-auto-reset)
   (stop-auto-reset))

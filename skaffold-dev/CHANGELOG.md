@@ -16,6 +16,14 @@ Because these are just starters, they will not be officially versioned.
 ### Security
 -->
 
+## 2022-03-23
+
+### Fixed
+
+- Test workflow
+  - Load test path via :env/test
+  - Add `src` and `resources` to Skaffold test dependencies
+
 ## 2022-03-22
 
 ### Changed

@@ -25,14 +25,8 @@
         ;; For now, use base image matching your host CPU arch (amd64/arm64)
         ;; platforms (get-env :string "PLATFORMS")
 
-        config {:aliases [:env/dev :env/test]
-                :main 'user
-                :working-dir "/home/app"
-                :base-image {:image-name "arm64v8/openjdk:11.0.14.1-jdk-bullseye"
-                             :type :registry}
-                :target-image {:image-name "myusername/mynewapp"
-                               :type :docker}}
-
+        jib-edn-file (io/file "." "jib.edn")
+        config (edn/read-string (slurp jib-edn-file))
         config-with-env (-> config
                             (cond-> image-name (assoc-in [:target-image :image-name] image-name))
                             (cond-> (not (nil? push-image?)) (assoc-in [:target-image :type]

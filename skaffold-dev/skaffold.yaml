@@ -12,6 +12,8 @@ build:
         paths:
         - src/
         - dev/
+        - resources/
+        - test/
     sync:
       manual:
       - src: src/**
@@ -30,6 +32,8 @@ test:
         timeoutSeconds: 60
         dependencies:
           paths:
+          -  "src/**"
+          -  "resources/**"
           -  "test/**"
 
 deploy:
