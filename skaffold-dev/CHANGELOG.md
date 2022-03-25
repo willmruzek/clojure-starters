@@ -20,6 +20,7 @@ Because these are just starters, they will not be officially versioned.
 
 ### Fixed
 
+- Move base Jibbit config to jib.edn
 - Test workflow
   - Load test path via :env/test
   - Add `src` and `resources` to Skaffold test dependencies
