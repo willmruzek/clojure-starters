@@ -1,5 +1,0 @@
-image:
-  file: ./skaffold-dev/.gitpod.Dockerfile
-ports:
-  - port: 8080
-  - port: 3177
